@@ -1,0 +1,46 @@
+O[3] 1. I/F 구성정보
+Device Name, Tc Name
+
+
+select A.device_id, A.connect_type, B.tc_id, C.topic_id || ', ' ||C.raw_topic_id as topic
+from tb_sf_device_info A,
+tb_sf_device_tc_info B,
+tb_sf_tc_info C
+where A.device_id = B.device_id
+and B.tc_id = C.tc_id;
+
+
+
+2. I/F 통계현황 (장치별, 시간대별)
+# 수신전문수 : tb_sf_device_tc_info 별 tc_id 목록으로 mongodb count조회 (messageData is not null)
+# 송신전문수 : tb_sf_device_tc_info 별 tc_id 목록으로 mongodb (수신이면서) error coulnm이 없는 count조회 
+조회 조건을 장치, 시작시간 ~ 종료시간
+
+
+3. I/F 통계현황 (TC전문 별, 시간대별) (2번에 팝업)
+DAQ수신 건수 --> IFM 수신건수
+웑본 == 저장건수 같게
+
+
+[1] 4. TC전문별 처리건수
+검색 : 장치(Select), TC ID, 시간
+
+O~~~Device Name colunm추가
+~~~수신건수가 0이상인것 검색조건
+~~~Error만 검색조건
+
+[2] 5. TC 전문별 처리목록 (4번에 수신건수에 대한팝업포함)
+
+O~~~Colunm Name 변경
+O~~~Route ID & Message Source 삭제
+O~~~Topic검색 삭제
+O~~~Row의 TC에 해당하는 Topic표시(DB)
+
+[0] POSCO Depoly(Meta, Logging, Editor Menu 삭제)
+
+
+
+
+db.iot_log_info.find({"messageData": "KLA12728"}, {"messageData": "KLA12728"}).count();
+db.iot_log_info.count({"messageData": "KLA12728"});
+db.iot_log_info.find();

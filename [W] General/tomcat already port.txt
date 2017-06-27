@@ -1,0 +1,4 @@
+> netstat -p tcp -ano
+8080 확인
+
+> taskkill /f /pid 8972

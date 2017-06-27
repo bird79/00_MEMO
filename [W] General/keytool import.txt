@@ -1,0 +1,7 @@
+General : %JAVA_HOME%/jre/lib/security
+POSCOICT: c:\Program Files\Java\jre7\lib\security
+
+changeit
+
+> keytool -import -alias poscoict -file poscoict.cer -keystroe cacerts
+> keytool -list

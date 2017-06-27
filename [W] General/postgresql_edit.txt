@@ -1,0 +1,8 @@
+# columm name
+ALTER TABLE tb_topology_file_info
+RENAME COLUMN append_file_path
+TO appnd_file_path;
+
+# table name
+alter table tb_topology_flow
+rename to tb_topology_flows;

@@ -1,0 +1,5 @@
+# topic list
+> ./bin/kafka-topics --zookeeper localhost:2181 --list
+
+# topic desc
+> ./bin/kafka-topics --zookeeper localhost:2181 --describe

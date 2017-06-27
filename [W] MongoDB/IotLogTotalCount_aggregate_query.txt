@@ -1,0 +1,44 @@
+db.iot_log_total.aggregate([
+{        
+    $match : {
+        //messageData : {$ne : null}
+        //,
+        $or : [ 
+            {
+                $and : [
+                    {year : 2016}, {month : 3}, {day : 22}, {hour : { $gte : 23 }}
+                ]
+            }, {
+                $and: [
+                    {year : 2016}, {month : 3}, {day : 23}, {hour : { $lt : 1 }}
+                ]
+            }
+        ], 
+        messageData : {
+            $in : ['KALAA001', 'KALAA002', 'KALAA003', 'KALAA004', 'KALAA005', 'KALAA006', 'KALAA007', 'KALAA008', 'KALAA009', 'KALAA010']
+        }
+    }
+},{ 
+    $group : {
+        _id : "$messageData",
+        recvCount : {
+            $sum : "$recvCount"
+        },
+        sendCount : {
+            $sum : "$sendCount"
+        }
+    }
+},{    
+    $project :  {
+        _id : 0,
+        recvCount : 1,
+        sendCount : 1,
+        messageData : "$_id"
+    }
+},
+{    
+    $sort :  {
+        messageData : 1
+    }
+}
+]);

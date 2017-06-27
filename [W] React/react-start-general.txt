@@ -1,0 +1,12 @@
+mkdir react-router-tutorial
+cd react-router-tutorial
+npm init
+npm install --save react react-dom
+npm install --save-dev babel-core babel-loader babel-preset-react babel-preset-es2015 webpack webpack-dev-server
+npm install --save-dev style-loader css-loader
+npm install --save react-router
+
+copy webpack.config.js
+copy public/index.html
+copy src/index.js
+copy src/components/App.js

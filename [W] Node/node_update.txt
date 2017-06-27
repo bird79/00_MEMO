@@ -1,0 +1,10 @@
+npm -version
+1.4.10
+
+
+node -v
+v0.10.22
+
+
+npm update -g
+npm install -g npm@latest

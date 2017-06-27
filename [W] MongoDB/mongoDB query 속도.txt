@@ -1,0 +1,40 @@
+# mongoDB query 속도
+
+host : 192.168.193.140
+port : 27017
+tool : NoSQL Manager for MongoDB Professional
+
+--------------------------------------------------------
+db.iot_log_info.count();
+
+0.0s
+0.0s
+0.1s
+0.0s
+0.0s
+
+--------------------------------------------------------
+db.iot_log_info.count({
+	"messageData": "KLA12728"
+});
+
+15.8s
+15.8s
+15.8s
+15.7s
+15.8s
+
+--------------------------------------------------------
+db.iot_log_info.count({
+    "messageData": "KLA12728",
+    "createTime" : {
+        "$gte" : ISODate("2016-03-22T10:04:02.308Z"),
+        "$lte" : ISODate("2016-03-23T00:05:02.308Z")
+    }
+});
+
+26.2s
+26.1s
+26.1s
+26.1s
+26.1s

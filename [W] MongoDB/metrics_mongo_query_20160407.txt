@@ -1,0 +1,75 @@
+db.iot_log_total.find({
+    messageData : { $ne : null },
+    year : 2016,
+    month : 3,
+    $or : [ 
+        {
+            $and : [
+                {day : 22}, {hour : { $gte : 11 }}
+            ]
+        }, {
+            $and: [
+                {day : 23}, {hour : { $lt : 11 }}
+            ]
+        }
+    ]
+}).sort({
+    messageData : 1,
+    year : 1,
+    month : 1,
+    day : 1,
+    hour : 1
+});
+
+db.iot_log_info.aggregate([
+{        
+    $match : {
+        createTime : {
+            $gte : ISODate("2016-03-22T10:00:00.000Z"),
+            $lt : ISODate("2016-03-23T10:00:00.000Z")
+        },
+        messageData : {$ne : null}
+        , messageData : {
+            $in : ['KALAA001', 'KALAA002', 'KALAA003', 'KALAA004', 'KALAA005', 'KLA12725', 'KLA12726', 'KLA16014']
+        }
+    }
+},
+{ 
+    $group : {
+        _id : {
+            messageData : "$messageData",
+            //dayOfYear : { $dayOfYear: "$createTime" },
+            year: { $year: "$createTime" },
+            month: { $month: "$createTime" },
+            day: { $dayOfMonth: "$createTime" },
+            hour : { $hour: "$createTime" }
+        },
+        count : {
+            $sum : 1
+        }
+    }
+},
+{    
+    $project :  {
+        _id : 0,
+        messageData : "$_id.messageData",
+        //dayOfYear : "$_id.dayOfYear",
+        year : "$_id.year",
+        month : "$_id.month",
+        day : "$_id.day",
+        hour : "$_id.hour",
+        //ymdh : "$_id.year" + "$_id.month" + "$_id.day" + "$_id.hour",
+        count : 1
+    }
+}
+,
+{    
+    $sort :  {
+        messageData : 1,
+        year : 1,
+        month : 1,
+        day : 1,
+        hour : 1
+    }
+}
+]);

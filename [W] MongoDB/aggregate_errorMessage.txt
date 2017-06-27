@@ -1,0 +1,26 @@
+db.iot_log_info.aggregate([
+      {        
+          $match : {        
+              messageData : {
+                  $in : ["KLA12710"]
+              }
+          }         
+      },
+      { 
+         $group : {
+            _id : {messageData : "$messageData", errorMessage : "$errorMessage"},
+            count : {
+                  $sum : 1
+            }
+         }
+      },
+
+      {    
+          $project :  {
+              _id : 0,
+              messageData : "$_id.messageData",
+              errorMessage : "$_id.errorMessage",
+              count : 1
+          }
+      }
+ ])

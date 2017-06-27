@@ -1,0 +1,30 @@
+/home/bird/apache-activemq-5.14.5
+
+/bin/activemq start
+
+
+http://localhost:8161/hawtio
+http://localhost:8161/admin
+
+# download
+http://central.maven.org/maven2/io/hawt
+
+
+c:\cygwin\home\bird\apache-activemq-5.14.5\webapps\hawtio-default-*
+
+
+# /home/bird/apache-activemq-5.14.5/bin/env
+~42 line
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Dhawtio.realm=activemq"
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Dhawtio.role=admins"
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Dhawtio.rolePrincipalClasses=org.apache.activemq.jaas.GroupPrincipal"
+ACTIVEMQ_OPTS="${ACTIVEMQ_OPTS} -Djava.security.auth.login.config=C:/cygwin/home/bird/apache-activemq-5.14.5/conf/login.config"
+
+
+# /home/bird/apache-activemq-5.14.5/bin/jetty.xml
+~75 line
+<bean class="org.eclipse.jetty.webapp.WebAppContext">
+    <property name="contextPath" value="/hawtio" />
+    <property name="war" value="${activemq.home}/webapps/hawtio-default-2.0.0.war" />
+    <property name="logUrlOnStart" value="true" />
+</bean>

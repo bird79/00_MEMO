@@ -1,0 +1,8 @@
+>vi /etc/profile
+
+---
+LANG=ko_KR;
+...
+...
+export LANG
+---
