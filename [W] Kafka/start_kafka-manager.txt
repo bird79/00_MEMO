@@ -1,2 +1,0 @@
-> cd kafka-manager
-> ./bin/kafka-manager -d -java-home "c:\Program Files\Java\jdk1.8.0_73"
